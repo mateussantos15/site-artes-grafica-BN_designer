@@ -1,0 +1,97 @@
+###############################
+# MAVEN
+###############################
+/target/
+/.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+###############################
+# ECLIPSE / IDE
+###############################
+/.settings/
+/.project
+/.classpath
+/.factorypath
+/.apt_generated/
+/.metadata/
+/bin/
+/tmp/
+/build/
+
+###############################
+# INTELLIJ (caso abra o projeto lá)
+###############################
+.idea/
+*.iml
+*.iws
+*.ipr
+
+###############################
+# LOGS & TEMP FILES
+###############################
+*.log
+*.tmp
+*.temp
+hs_err_pid*
+replay_pid*
+
+###############################
+# OPERATING SYSTEM FILES
+###############################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+###############################
+# JAVA / SPRING BOOT
+###############################
+*.class
+*.jar
+*.war
+*.ear
+*.prefs
+
+###############################
+# GIT / VERSION CONTROL
+###############################
+#.git
+#.gitignore
+
+###############################
+# ENVIRONMENT / CREDENTIALS
+###############################
+application-secret.properties
+application-secrets.yml
+# Ignorar arquivos .env
+.env
+# Mas permitir .env.example
+!.env.example
+
+###############################
+# DOCKER
+###############################
+/docker-compose.override.yml
+/docker-data/
+/docker-volume/
+/db_data/
+docker-*.log
+
+###############################
+# NODE/NPM (caso o projeto tenha front futuro)
+###############################
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+out/
