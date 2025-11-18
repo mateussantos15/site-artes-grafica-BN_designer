@@ -1,0 +1,24 @@
+# Arquivos e pastas ignorados pelo Docker
+# Impede que arquivos desnecessários sejam enviados para o contexto de build
+
+# Diretórios de build
+/target
+/build
+
+# Configurações de IDE
+/.idea
+/.vscode
+*.iml
+
+# Git
+/.git
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos de ambiente (NÃO devem ir para a imagem)
+.env
