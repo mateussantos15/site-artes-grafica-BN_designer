@@ -1,223 +1,223 @@
 # BNDesigner — Plataforma de Produtos Digitais
-Aplicação completa construída com **Spring Boot**, **PostgreSQL** e **Docker**, seguindo arquitetura limpa e boas práticas de mercado.  
-Este projeto foi desenvolvido para fins de estudo, portfólio profissional e futura entrega para clientes reais.
+
+Aplicação **back-end** desenvolvida com **Spring Boot**, **PostgreSQL** e **Docker**, seguindo princípios de **arquitetura limpa**, **boas práticas de mercado** e **desenvolvimento incremental**.
+
+Este projeto tem como objetivo **aprendizado profundo**, **construção de portfólio profissional** e **base sólida para entrega futura a clientes reais**.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
 ### **Back-end**
-- Java 21+
-- Spring Boot 3.x
+- Java 21
+- Spring Boot 3.5.x
   - Spring Web
   - Spring Data JPA
-  - Validation
-  - Lombok
-- MapStruct (mapeamento Entity ↔ DTO)
-- PostgreSQL
+  - Spring Validation
+  - Spring Actuator
+- Lombok
+- MapStruct (planejado)
+- PostgreSQL 15
 - Docker & Docker Compose
-- Testcontainers (testes de integração)
-- JUnit 5 + Mockito (testes unitários)
+- Testcontainers (planejado)
+- JUnit 5 + Mockito (planejado)
 
-### **Outros**
-- PgAdmin (interface web para banco)
-- Git/GitHub (versionamento)
+### **Infraestrutura & Ferramentas**
+- Docker Hub (planejado)
+- PgAdmin
+- Maven
+- Git & GitHub
+- Eclipse IDE
 - Figma (prototipação)
-- Maven (build e dependências)
 
 ---
 
-## 📌 Objetivo do Projeto
+## 🎯 Objetivo do Projeto
 
-O BNDesigner é um sistema de venda de **produtos digitais**, como mockups, artes e templates.  
-Ele foi desenvolvido com foco em:
+O **BNDesigner** é uma plataforma de venda de **produtos digitais** (artes, mockups, templates, etc.), construída com foco em:
 
-- Aprendizado prático de desenvolvimento back-end Java
-- Organização e arquitetura profissional
-- Versionamento correto com Git
-- Práticas modernas com Docker
-- Implementação incremental de testes unitários e de integração
-- Preparação para projetos reais e entrevistas
+- Aprendizado prático do ciclo completo de software
+- Arquitetura bem definida desde o início
+- Uso correto de ambientes (dev, docker, test, prod)
+- Infraestrutura reproduzível com Docker
+- Evolução gradual e segura do código
+- Preparação para projetos reais e entrevistas técnicas
 
 ---
 
-## 🏗️ Arquitetura do Projeto (camadas)
+## 🏗️ Arquitetura do Projeto
+
+O projeto é organizado em **camadas bem definidas**, com separação clara entre **aplicação** e **infraestrutura**.
 
 ```text
-src/main/java/com/bndesigner
-├─ controller      # Endpoints REST
-├─ service         # Regras de negócio
-├─ repository      # JPA repositories
-├─ model
-│  ├─ entity       # Entidades (JPA)
-│  └─ dto          # DTOs (request/response)
-├─ mapper          # MapStruct DTO ↔ Entity
-├─ handler         # Tratamento global de exceções
-├─ config          # Configurações adicionais
-└─ util            # Utilitários gerais
-
+bndesigner
+├─ infra/                    # Infraestrutura do projeto
+│  ├─ docker/                # Dockerfile, scripts, configs
+│  ├─ db/                    # Scripts SQL (init/migrations)
+│  └─ compose/               # docker-compose.override.yml
+│
+├─ src/main/java/com/bndesigner
+│  ├─ controller             # Endpoints REST (a criar)
+│  ├─ service                # Regras de negócio (a criar)
+│  ├─ repository             # JPA Repositories (a criar)
+│  ├─ domain
+│  │  ├─ entity              # Entidades JPA
+│  │  └─ enums               # Enums de domínio
+│  ├─ mapper                 # MapStruct (planejado)
+│  ├─ exception					# Exception handling (planejado)
+│  │  ├─ hendler              
+│  │  └─ custom               
+│  └─ config                 # Configurações Spring
+│
+├─ src/main/resources
+│  ├─ application.properties
+│  ├─ application-dev.properties
+│  ├─ application-docker.properties
+│  ├─ application-test.properties
+│  └─ application-prod.properties
+│
+├─ docker-compose.yml
+├─ docker-compose.override.yml
+├─ .env
+└─ README.md
 ```
-
 ---
 
+## 📐 Padrões e Boas Práticas
 
-## Padrões utilizados:
-- **RESTful**
-- **DTOs para entrada e saída**
-- **MapStruct para mapeamento**
-- **Exceptions customizadas**
-- **ControllerAdvice** para padronizar erros
-- **Camadas desacopladas**
+- Arquitetura em camadas
+- RESTful APIs (a implementar)
+- DTOs para entrada e saída (planejado)
+- Separação por ambientes via Spring Profiles
+- Infraestrutura desacoplada da aplicação
+- Configuração por variáveis de ambiente
+- Testes introduzidos no momento correto do ciclo
 
 ---
 
 ## 🗄️ Banco de Dados
 
-O projeto utiliza PostgreSQL com Docker.  
-As entidades principais incluem:
+- PostgreSQL 15
+- Executado via Docker
+- Persistência com volumes
+- Criação automática de tabelas via JPA (fase inicial)
 
-- **Usuário**
-- **Categoria**
-- **Produto**
-- **Avaliação**
-- **Cupom**
-- **Pedido**
-- **ItemPedido**
-- **Pagamento**
-- **LogAdmin**
-
-O esquema foi projetado seguindo normas de integridade, validações e boas práticas.
+### Entidades (em construção)
+- Usuário ✅
+- Categoria
+- Produto
+- Avaliação
+- Cupom
+- Pedido
+- ItemPedido
+- Pagamento
+- LogAdmin
 
 ---
 
-## 🐳 Como rodar o projeto com Docker
+## 🐳 Execução com Docker
 
-### 1. Pré-requisitos
-- Docker instalado
-- Docker Compose instalado
-- JDK 21 configurado
+### Pré-requisitos
+- Docker
+- Docker Compose
+- JDK 21 (para execução local)
 
-### 2. Clone o repositório
-```bash
-git clone https://github.com/mateussantos15/site-artes-grafica-BN_designer.git
-cd bndesigner
-```
-### 3. Build e inicialização (primeira vez)
+### Subir o ambiente completo
 ```bash
 docker-compose up --build
 ```
-### 4. Subir containers novamente
+
+---
+
+### Subidas posteriores
 ```bash
 docker-compose up
 ```
-### 5. Acessos
 
-- Aplicação: http://localhost:8080
+---
+### Serviços disponíveis
 
-- PgAdmin: http://localhost:8081
-    - Email: admin@local
-    - Senha: admin 
+- **API**: http://localhost:8080
+- **PgAdmin**: http://localhost:8081  
+  - Email: `admin@local`  
+  - Senha: `admin`
+
+---
+
+## 🌐 Ambientes (Spring Profiles)
+
+O projeto utiliza **profiles reais**, cada um com responsabilidade clara:
+
+```text
+
+| Profile | Uso |
+|--------|-----|
+| dev | Execução local sem Docker |
+| docker | Execução dentro de containers |
+| test | Execução de testes automatizados |
+| prod | Produção (futuro) |
+
+```
+
+### Ativação de profile
+```bash
+SPRING_PROFILES_ACTIVE=docker
 ```
 
 ---
 
-### 🌐 Perfis de Execução
+## 🧪 Testes
 
-- application.properties → ambiente local (PostgreSQL local)
+Ainda **não implementados**, por decisão arquitetural consciente.
 
-- application-docker.properties → ambiente Docker (DB via docker-compose)
+Os testes começarão a ser escritos quando:
+- Repositories forem criados
+- Casos de uso existirem
+- Houver lógica de negócio real para validar
 
-Variáveis de ambiente configuradas no docker-compose.yml:
-
-- DB_HOST
-
-- DB_PORT
-
-- DB_NAME
-
-- DB_USER
-
-- DB_PASSWORD
-```
+### Tecnologias previstas
+- JUnit 5
+- Mockito
+- Testcontainers
 
 ---
 
-### 🧪 Testes
+## 📌 Status do Projeto
 
-O projeto implementa:
+🔧 **Em desenvolvimento ativo**
 
-**✔ Testes Unitários**
+### Concluído
+- Estrutura base do projeto
+- Separação de infraestrutura
+- Docker e PostgreSQL configurados
+- Profiles de ambiente
+- Entidade Usuario
+- Versionamento organizado
 
-- Usando JUnit 5 e Mockito
-
-- Focados na camada de service
-
-**✔ Testes de Integração**
-
-- Usando Testcontainers
-
-- Banco PostgreSQL real para validar repositórios e fluxos completos
-
-**Executar testes:**
-
-	mvn test
-
-
----
-
-### 📤 Rotas Principais (exemplo)
-**Usuários**
-
-- GET /api/usuarios
-
-- GET /api/usuarios/{id}
-
-- POST /api/usuarios
-
-- PUT /api/usuarios/{id}
-
-- DELETE /api/usuarios/{id}
-
-- GET /api/usuarios/email/{email}
-
-**Produtos**
-
-Seguem o mesmo padrão RESTful acima.
-
+### Próximos passos
+- Repository do Usuário
+- Testes de persistência
+- Service layer
+- API REST do Usuário
+- DTOs e mappers
+- Autenticação (JWT)
+- Deploy em nuvem
 
 ---
 
-### 📌 Status do Projeto
+## 🧑‍💻 Autor
 
-Atualmente em desenvolvimento.  
-Funcionalidades sendo implementadas de forma incremental e orientada a boas práticas:
-
-- Estrutura inicial do projeto  
-- Dockerfile + docker-compose  
-- Configuração PostgreSQL  
-- Entidade Usuario + CRUD REST  
-- Handler global de exceções  
-- Organização das camadas  
-- *Implementação completa das demais entidades*  
-- *Mappers DTO ↔ Entity*  
-- *Testes unitários e de integração*  
-- *Autenticação JWT*  
-- *Deploy em nuvem (Render/AWS/EC2)*
-
----
-
-### 🧑‍💻 Autor
-
-Mateus Santos  
+**Mateus Santos**  
 Bacharel em Sistemas de Informação  
-Desenvolvedor Java (Back-end + Mobile Android)
+Desenvolvedor Java Back-end | Android  
 
-LinkedIn: https://www.linkedin.com/in/  
-GitHub: https://github.com/mateussantos15
+- GitHub: https://github.com/mateussantos15  
+- LinkedIn: https://www.linkedin.com/in/
 
 ---
 
-### 📄 Licença
+## 📄 Licença
 
-Este projeto está sob a licença MIT.
-No entanto, não se trata apenas de um projeto de estudos e, por isso, o código-fonte completo não ficará disponível publicamente. O uso, modificação e distribuição são permitidos, mas o repositório poderá permanecer privado conforme a necessidade do autor.
+Licença MIT.  
+O projeto pode permanecer **privado**, pois não se trata apenas de um estudo simples, mas de uma base para aplicações reais.
+
