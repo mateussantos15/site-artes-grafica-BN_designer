@@ -1,0 +1,22 @@
+# Ignora diretórios de build do Maven
+target/
+
+# Configurações de IDE
+.idea/
+.vscode/
+*.iml
+
+# Git
+.git/
+.gitignore
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos de ambiente (NÃO devem ir para a imagem)
+.env
+.env.*

@@ -4,15 +4,16 @@ services:
     container_name: bndesigner_db
     restart: unless-stopped
     environment:
-      - POSTGRES_DB=bndesigner
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-senha}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${DB_PORT_EXTERNAL}:${DB_PORT_INTERNAL}"
     volumes:
       - db_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+      - ./infra/db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-bndesigner}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -20,27 +21,27 @@ services:
       - bndesigner-net
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile
     container_name: bndesigner_app
     restart: on-failure
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    ports:
+      - "${APP_PORT_EXTERNAL}:${APP_PORT_INTERNAL}"
     environment:
       - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=bndesigner
-      - DB_USER=${POSTGRES_USER:-postgres}
-      - DB_PASSWORD=${POSTGRES_PASSWORD:-senha}
-      - SPRING_PROFILES_ACTIVE=docker
-      # opcional: definir explicitamente a URL do Spring
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bndesigner
-    ports:
-      - "8080:8080"
+      - DB_PORT=${DB_PORT_INTERNAL}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE}
     networks:
       - bndesigner-net
     healthcheck:
-      # observe: a imagem do runtime precisa ter 'curl' disponível para essa checagem funcionar
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:${APP_PORT_INTERNAL}/actuator/health || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 6
@@ -50,10 +51,10 @@ services:
     container_name: bndesigner_pgadmin
     restart: unless-stopped
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL:-admin@local}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD:-admin}
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     ports:
-      - "8081:80"
+      - "${PGADMIN_PORT_EXTERNAL}:80"
     depends_on:
       - db
     networks:
