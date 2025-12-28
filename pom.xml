@@ -50,14 +50,12 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- H2 Database (comentado) -->
-        <!--
+        <!-- H2 Database (apenas para testes) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
-        -->
 
         <!-- Lombok -->
         <dependency>
@@ -94,10 +92,11 @@
             <scope>test</scope>
         </dependency>
         
+        <!-- Spring Boot Actuator -->
         <dependency>
-  			<groupId>org.springframework.boot</groupId>
-  			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -130,6 +129,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>app</finalName>
+                </configuration>
             </plugin>
         </plugins>
     </build>
