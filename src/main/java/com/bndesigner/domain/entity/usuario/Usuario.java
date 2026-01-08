@@ -1,6 +1,8 @@
-package com.bndesigner.model.entity.usuario;
+package com.bndesigner.domain.entity.usuario;
 
 import java.time.LocalDateTime;
+
+import com.bndesigner.domain.enums.usuario.TipoUsuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,12 +11,20 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "usuario")
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class Usuario {
 
 	@Id
@@ -32,15 +42,15 @@ public class Usuario {
 	@Column(nullable = false, length = 255)
 	private String senha;
 
-	@Column(nullable = false, updatable = false)
-	private LocalDateTime dataCadastro = LocalDateTime.now();
-
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 20)
 	private TipoUsuario tipoUsuario;
 
-	public enum TipoUsuario {
-		CLIENTE, ADMIN
+	@Column(nullable = false, updatable = false)
+	private LocalDateTime dataCadastro;
+	
+	@PrePersist
+	private void prePersist() {
+		this.dataCadastro = LocalDateTime.now();
 	}
-
 }
