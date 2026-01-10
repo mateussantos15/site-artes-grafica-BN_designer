@@ -51,7 +51,7 @@ class UsuarioRepositoryTest {
 
         usuarioRepository.save(usuario);
 
-        boolean existe = usuarioRepository.existsByEmail("admin@email.com");
+        boolean existe = usuarioRepository.existsByEmail("mateus@email.com");
 
         assertThat(existe).isTrue();
     }
