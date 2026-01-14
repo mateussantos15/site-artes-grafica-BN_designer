@@ -42,6 +42,7 @@ public class UsuarioService {
 		Usuario usuario = buscarPorId(id);
 		usuario.setNome(usuarioAtualizado.getNome());
 		usuario.setEmail(usuarioAtualizado.getEmail());
+		usuario.setSobrenome(usuarioAtualizado.getSobrenome());
 		return usuarioRepository.save(usuario);
 	}
 	
